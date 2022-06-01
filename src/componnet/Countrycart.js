@@ -5,7 +5,7 @@ export const Countrycard = ({countryiesCard}) => {
     <>
     <div className="container">
         {countryiesCard?.map((data, index) => (
-          <Link key={index} to="/">
+          <Link key={index} to={`/country/${data.name.common}}`} state={Countrycard}>
             <div className="card">
               <img src={data.flags.png} alt={data.name.common} />
               <h3>{data.name.common}</h3>
