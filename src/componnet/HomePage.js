@@ -1,11 +1,21 @@
-import { Link } from "react-router-dom";
+
+import axios from "axios";
+import { useState,useEffect } from "react";
+
 const Homepage = () => {
+  const [country,setCountry]=useState();
+
+  useEffect(()=>{
+    axios.get('https://restcountries.com/v3.1/all')
+    .then(function(res){
+      setCountry(res.data)
+      console.log(res.data);
+    })
+  },[])
   return (
-    <div>
-      <Link>
-      <h1>Hello😍</h1>
-      </Link>
-    </div>
+    <>
+    
+    </>
   );
 };
 export default Homepage;
