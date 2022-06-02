@@ -3,8 +3,18 @@ import { Link } from "react-router-dom";
 
 const CountriesCard = ({ countriesData }) => {
   const [search, setSearch] = useState("");
-  const [filterParam, setFilterParam] = useState("");
-
+  const searchText = (e) => {
+    setSearch(e.target.value);
+  };
+  let dataSearch = countriesData.filter((item) => {
+    return Object.keys(item).some((key) =>
+      item[key]
+        .toString()
+        .toLowerCase()
+        .includes(search.toString().toLowerCase())
+    );
+  });
+  const [filterParam, setFilterParam] = useState(["All"]);
   return (
     <>
       <div className="nav">
@@ -13,14 +23,13 @@ const CountriesCard = ({ countriesData }) => {
             type="text"
             placeholder="Search"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={searchText.bind(this)}
           />
         </div>
         <div className="select-box">
           <select
             onChange={(e) => {
-              const selected = e.target.value;
-              setFilterParam(selected);
+              setFilterParam(e.target.value);
             }}
           >
             <option value="All">Filter By Region</option>
@@ -33,17 +42,8 @@ const CountriesCard = ({ countriesData }) => {
         </div>
       </div>
       <div className="container">
-        {countriesData
-          ?.filter((value) => {
-            if (search === "") {
-              return value;
-            } else if (
-              value.name.common.toLowerCase().includes(search.toLowerCase())
-            ) {
-              return value;
-            }
-          })
-          .map((data, index) => {
+        {countriesData &&
+          dataSearch.map((data, index) => {
             const { flags, name, population, region, capital } = data;
             return (
               <Link
