@@ -3,6 +3,7 @@ import Notfound from "./componnet/NotFound";
 import { Route, Routes } from "react-router-dom";
 import { Header } from "./componnet/Header";
 import { CountryDtals } from "./componnet/CountryDtals";
+
 function App() {
   return (
 <>
