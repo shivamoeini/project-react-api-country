@@ -14,7 +14,7 @@ const searchText=(e)=>{
     <>
       <div className="nav">
         <div className="searchbox">
-          <input type="text" value={search} autoComplete="off" placeholder="Search" onChange={}/>
+          <input type="text" value={search} autoComplete="off" placeholder="Search" onChange={searchText.bind(this)}/>
         </div>
       </div>
       <div className="selectbox">
